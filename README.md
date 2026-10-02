@@ -6,16 +6,31 @@ This repository hosts the static website files for **Rasa Art** and **GharGharGi
 
 ```text
 /
-├── index.html          # Main hub linking to both apps
-├── styles.css          # Premium shared stylesheet (Apple inspired)
-├── README.md           # Deployment documentation
-└── rasaart/            # Rasa Art sub-directory
-    ├── index.html      # Rasa Art landing page
-    ├── privacy.html    # Rasa Art privacy policy
-    ├── support.html    # Rasa Art support & FAQ
-    ├── terms.html      # Rasa Art terms of use
-    └── assets/
-        └── logo.png    # Rasa Art app icon
+├── index.html                  # Main hub linking all apps
+├── styles.css                  # Premium shared stylesheet (Apple inspired)
+├── README.md                   # Deployment documentation
+├── privacypolicy.html          # GharGharGita privacy policy (root alias)
+├── prachodayatprivacypolicy.html # Prachodayat privacy policy (root alias)
+├── perminuteprivacypolicy.html # Per Minute Content Reader privacy policy (root alias)
+├── rasaart/                    # Rasa Art sub-directory
+│   ├── index.html              # Rasa Art landing page
+│   ├── privacy.html            # Rasa Art privacy policy
+│   ├── support.html            # Rasa Art support & FAQ
+│   ├── terms.html              # Rasa Art terms of use
+│   └── assets/logo.png         # Rasa Art app icon
+├── gharghargita/               # GharGharGita sub-directory
+│   ├── index.html              # GharGharGita landing page
+│   └── assets/logo.png         # GharGharGita app icon
+├── prachodayat/                # Prachodayat sub-directory
+│   ├── index.html              # Prachodayat landing page
+│   └── assets/logo.png         # Prachodayat app icon
+└── perminute/                  # Per Minute Content Reader sub-directory
+    ├── index.html              # Per Minute landing page
+    ├── privacy.html            # Per Minute privacy policy
+    ├── support.html            # Per Minute support & FAQ
+    ├── terms.html              # Per Minute terms of use
+    ├── STORE_DATA_SAFETY_NOTES.md # Developer App Store / Play Store data notes
+    └── assets/logo.png         # Per Minute app icon
 ```
 
 ## How to Publish to GitHub Pages
