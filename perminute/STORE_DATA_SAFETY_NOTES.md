@@ -63,16 +63,26 @@ Google Play requires developers to declare whether data is collected, shared, an
 
 ---
 
-## 4. Third-Party SDK & Dependency Audit
+## 4. Third-Party Services, Network & Dependency Audit
 
-| Service / SDK | Type | Data Transmitted Off-Device | Purpose |
+Clearly distinguish the application's external network interactions from on-device processing:
+
+| Service / Dependency | Type / Host | Data Transmitted Off-Device | Purpose |
 | :--- | :--- | :--- | :--- |
-| **Apple StoreKit** (iOS) | Platform In-App Purchase | Apple receives purchase transactions; developer receives receipt/entitlement | Subscriptions & Lifetime unlock |
+| **Model Distribution Host** (Hugging Face) | Static Content Delivery Host | **Outbound GET request only.** Downloads static model weights (`qwen2.5-1.5b-instruct-q4_k_m.gguf`). **Zero** user documents, reading records, or personal identifiers are uploaded. | One-time model download if user opts into Offline Intelligence |
+| **Local Inference Engine** (`readrush_llama`) | Local On-Device Execution (llama.cpp FFI) | **None.** Runs 100% on-device processor. No cloud AI API, no remote LLM inference endpoints. | Paced reading assistance & comprehension |
+| **Apple StoreKit** (iOS) | Platform In-App Purchase | Apple receives purchase transactions; developer receives signed local receipt/entitlement | Subscriptions & Lifetime unlock |
 | **Google Play Billing** (Android) | Platform In-App Purchase | Google receives purchase transactions; developer receives purchase token | Subscriptions & Lifetime unlock |
-| **Local Inference Model** | On-Device Intelligence | **None** (all computation executes on local processor) | Optional reading assistance |
-| **Google AdMob / Ads** | None | **Not present in release** | N/A |
-| **Firebase / Analytics** | None | **Not present in release** | N/A |
-| **Crashlytics / Sentry** | None | **Not present in release** | N/A |
+| **Google AdMob / Advertising SDKs** | None | **Not present in release.** | N/A |
+| **Firebase / Analytics / Telemetry** | None | **Not present in release.** | N/A |
+| **Crashlytics / Sentry / Crash Reporting** | None | **Not present in release.** | N/A |
+
+### Android Manifest Permissions Breakdown
+
+- `android.permission.INTERNET`: Used exclusively for the optional one-time GGUF model download from Hugging Face content delivery infrastructure. Inference never uses the network.
+- `android.permission.POST_NOTIFICATIONS`: Used on Android 13+ to display local foreground progress notifications during model download or large document library import.
+- `android.permission.FOREGROUND_SERVICE` & `android.permission.FOREGROUND_SERVICE_DATA_SYNC`: Used by `ModelDownloadService` and `LibraryImportService` to ensure active file imports and model downloads complete reliably without operating system termination when the app is backgrounded.
+- **No Sensitive Permissions:** No camera, microphone, location, contacts, phone state, or advertising ID permissions are requested.
 
 ---
 
